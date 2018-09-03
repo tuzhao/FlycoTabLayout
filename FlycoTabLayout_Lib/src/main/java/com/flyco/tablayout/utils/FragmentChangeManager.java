@@ -3,10 +3,14 @@ package com.flyco.tablayout.utils;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 public class FragmentChangeManager {
+
+    private boolean isDebug = false;
+
     private FragmentManager mFragmentManager;
     private int mContainerViewId;
     /**
@@ -70,7 +74,13 @@ public class FragmentChangeManager {
             } else {
                 ft.hide(fragment);
             }
-            ft.commit();
+            if (mFragmentManager.isStateSaved()) {
+                log("host state is saved.");
+                ft.commitNowAllowingStateLoss();
+            } else {
+                log("host state is not saved.");
+                ft.commit();
+            }
         }
         mCurrentTab = index;
     }
@@ -82,4 +92,15 @@ public class FragmentChangeManager {
     public Fragment getCurrentFragment() {
         return mFragments.get(mCurrentTab);
     }
+
+    public void setDebug(boolean flag) {
+        this.isDebug = flag;
+    }
+
+    private void log(String msg) {
+        if (isDebug) {
+            Log.d("FragmentChangeManager", msg);
+        }
+    }
+
 }
