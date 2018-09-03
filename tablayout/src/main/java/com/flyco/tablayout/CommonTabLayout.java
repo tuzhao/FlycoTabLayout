@@ -972,6 +972,9 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         }
     }
 
+    public FragmentChangeManager getFragmentChangeManager() {
+        return mFragmentChangeManager;
+    }
 
     protected int dp2px(float dp) {
         final float scale = mContext.getResources().getDisplayMetrics().density;
