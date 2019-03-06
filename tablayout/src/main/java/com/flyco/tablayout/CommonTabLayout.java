@@ -122,6 +122,11 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     private ValueAnimator mValueAnimator;
     private OvershootInterpolator mInterpolator = new OvershootInterpolator(1.5f);
 
+    /**
+     * 点击tab的item时selector效果
+     */
+    private int mTabItemBgSelector;
+
     private FragmentChangeManager mFragmentChangeManager;
 
     public CommonTabLayout(Context context) {
@@ -203,6 +208,8 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
         mTabWidth = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_width, dp2px(-1));
         mTabPadding = ta.getDimension(R.styleable.CommonTabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(10));
 
+        mTabItemBgSelector = ta.getResourceId(R.styleable.CommonTabLayout_tl_bg_tab_selector, R.drawable.ftl_bg_default_navigation_common_tab_layout_item);
+
         ta.recycle();
     }
 
@@ -247,7 +254,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             } else {
                 tabView = View.inflate(mContext, R.layout.layout_tab_top, null);
             }
-
+            tabView.setBackgroundResource(mTabItemBgSelector);
             tabView.setTag(i);
             addTab(i, tabView);
         }
