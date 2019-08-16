@@ -9,9 +9,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
+import com.flyco.tablayout.listener.OnTabPreSelectListener;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.flyco.tablayout.utils.UnreadMsgUtils;
 import com.flyco.tablayout.widget.MsgView;
@@ -82,6 +84,16 @@ public class CommonTabActivity extends AppCompatActivity {
         mTabLayout_8 = ViewFindUtils.find(mDecorView, R.id.tl_8);
 
         mTabLayout_1.setTabData(mTabEntities);
+        mTabLayout_1.setOnTabPreSelectListener(new OnTabPreSelectListener() {
+            @Override
+            public boolean onTabPreSelect(int position) {
+                if (3 == position) {
+                    Toast.makeText(CommonTabActivity.this, "不会切换", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+        });
         tl_2();
         mTabLayout_3.setTabData(mTabEntities, this, R.id.fl_change, mFragments2);
         mTabLayout_4.setTabData(mTabEntities);

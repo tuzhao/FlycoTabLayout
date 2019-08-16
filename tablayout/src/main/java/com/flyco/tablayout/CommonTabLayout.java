@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
+import com.flyco.tablayout.listener.OnTabPreSelectListener;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.flyco.tablayout.utils.FragmentChangeManager;
 import com.flyco.tablayout.utils.UnreadMsgUtils;
@@ -128,6 +129,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     private int mTabItemBgSelector;
 
     private FragmentChangeManager mFragmentChangeManager;
+    private OnTabPreSelectListener onTabPreSelectListener;
 
     public CommonTabLayout(Context context) {
         this(context, null, 0);
@@ -275,14 +277,29 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             @Override
             public void onClick(View v) {
                 int position = (Integer) v.getTag();
-                if (mCurrentTab != position) {
-                    setCurrentTab(position);
-                    if (mListener != null) {
-                        mListener.onTabSelect(position);
+                if (null != onTabPreSelectListener) {
+                    if (!onTabPreSelectListener.onTabPreSelect(position)) {
+                        if (mCurrentTab != position) {
+                            setCurrentTab(position);
+                            if (mListener != null) {
+                                mListener.onTabSelect(position);
+                            }
+                        } else {
+                            if (mListener != null) {
+                                mListener.onTabReselect(position);
+                            }
+                        }
                     }
                 } else {
-                    if (mListener != null) {
-                        mListener.onTabReselect(position);
+                    if (mCurrentTab != position) {
+                        setCurrentTab(position);
+                        if (mListener != null) {
+                            mListener.onTabSelect(position);
+                        }
+                    } else {
+                        if (mListener != null) {
+                            mListener.onTabReselect(position);
+                        }
                     }
                 }
             }
@@ -991,6 +1008,10 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     protected int sp2px(float sp) {
         final float scale = this.mContext.getResources().getDisplayMetrics().scaledDensity;
         return (int) (sp * scale + 0.5f);
+    }
+
+    public void setOnTabPreSelectListener(OnTabPreSelectListener onTabPreSelectListener) {
+        this.onTabPreSelectListener = onTabPreSelectListener;
     }
 
 }
