@@ -3,13 +3,14 @@ package com.flyco.tablayoutsamples.ui;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -20,6 +21,7 @@ import com.flyco.tablayoutsamples.utils.ViewFindUtils;
 import java.util.ArrayList;
 
 public class SlidingTabActivity extends AppCompatActivity implements OnTabSelectListener {
+
     private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private final String[] mTitles = {

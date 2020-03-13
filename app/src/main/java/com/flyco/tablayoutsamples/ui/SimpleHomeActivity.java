@@ -4,14 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.flyco.tablayoutsamples.adapter.SimpleHomeAdapter;
 
 public class SimpleHomeActivity extends AppCompatActivity {
+
     private Context mContext = this;
     private final String[] mItems = {"SlidingTabLayout", "CommonTabLayout", "SegmentTabLayout"};
     private final Class<?>[] mClasses = {SlidingTabActivity.class, CommonTabActivity.class,

@@ -39,5 +39,4 @@
         mv:mv_isRadiusHalfHeight="true"
         mv:mv_strokeColor="#ffffff"
         mv:mv_strokeWidth="1dp" />
-
 </RelativeLayout>
